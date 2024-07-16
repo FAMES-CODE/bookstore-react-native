@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     view: {
-        backgroundColor : '#111828',
+        backgroundColor : '#F6E6CB',
         height: '100%',
     },
     text: {
@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
     h1: {
         textTransform: 'uppercase',
         fontWeight: 'bold', 
-        color: '#5046e5',
-
     },
     link: {
         textDecorationLine: 'underline',

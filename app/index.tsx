@@ -3,9 +3,6 @@ import styles from "../styles/style.js";
 import {
   IconButton,
   Text,
-  Dialog,
-  Portal,
-  PaperProvider,
   Button,
 } from "react-native-paper";
 import { Link } from "expo-router";

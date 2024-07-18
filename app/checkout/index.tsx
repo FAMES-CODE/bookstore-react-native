@@ -14,53 +14,60 @@ export default function Index() {
   return (
     <View style={[styles.view]}>
       <ScrollView>
-        
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 30,
-        }}
-      >
-        <Icon size={24} allowFontScaling={true} color="black" source="draw" />
-        <Text
-          variant="titleLarge"
-          style={[
-            styles.h1,
-            {
-              color: "#000",
-            },
-          ]}
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 30,
+          }}
         >
-          Checkout form
-        </Text>
-      </View>
-      <View
-        style={{
-          margin: 30,
-        }}
-      >
-        {cart && cart.length > 0
-          ? cart.map((item, index) => <Item key={index} props={item} />)
-          : "No items in cart"}
-        <Text
-          variant="titleLarge"
-          style={[
-            styles.h1,
-            {
-              color: "#000",
-              textAlign: "center",
-              marginTop: 30,
-              marginBottom: 30,
-            },
-          ]}
+          <Icon size={24} allowFontScaling={true} color="black" source="draw" />
+          <Text
+            variant="titleLarge"
+            style={[
+              styles.h1,
+              {
+                color: "#000",
+              },
+            ]}
+          >
+            Checkout form
+          </Text>
+        </View>
+        <View
+          style={{
+            margin: 30,
+          }}
         >
-          Details
-        </Text>
-        <Form />
-      </View>
+          <View style={[styles.container, {
+            gap: 10,
+            alignItems: "center",
+          }]}>
+            {cart && cart.length > 0
+              ? cart.map((item, index) => <Item key={index} props={item} />)
+              : "No items in cart"}
+            <Text variant="titleLarge" style={[styles.h1, { color: "#000" }]}>
+              Total : {cart.reduce((a, b) => a + b.price * b.quantity, 0)} $
+            </Text>
+          </View>
+          <Text
+            variant="titleLarge"
+            style={[
+              styles.h1,
+              {
+                color: "#000",
+                textAlign: "center",
+                marginTop: 30,
+                marginBottom: 30,
+              },
+            ]}
+          >
+            Details
+          </Text>
+          <Form />
+        </View>
       </ScrollView>
     </View>
   );

@@ -5,10 +5,8 @@ import styles from "@/styles/style";
 import { Button, Text } from "react-native-paper";
 import books from "../../Data/books";
 import useCart from "@/hooks/useCart";
-import {images} from "../../Data/images";
+import { images } from "../../Data/images";
 export default function Index() {
-  
-  
   if (!books || books.length === 0) {
     return (
       <View
@@ -30,7 +28,6 @@ export default function Index() {
 
   return (
     <View style={[styles.view, styles.container]}>
-      
       <ScrollView>
         <View
           style={{
@@ -60,7 +57,7 @@ function Book({
   if (!props || !props.image || !props.title || !props.price) {
     throw new Error("Invalid Book props");
   }
-  const { cart, addToCart } = useCart();
+  const { cart, addToCart, updateQuantity } = useCart();
   return (
     <View
       style={{
@@ -104,7 +101,20 @@ function Book({
           <Text style={[styles.text]}>{props.title}</Text>
           <Text style={[styles.text]}>{props.price}$</Text>
         </View>
-        <Button icon="cart" mode="text" textColor="white" onPress={() => addToCart(props)}>
+        <Button
+          icon="cart"
+          mode="text"
+          textColor="white"
+          onPress={() => {
+            const bookInCart = cart.find((book: any) => book.id === props.id);
+            const quantity = bookInCart ? bookInCart.quantity + 1 : 1;
+            if (bookInCart) {
+              updateQuantity(props.id, quantity);
+            } else {
+              addToCart({ ...props, quantity });
+            }
+          }}
+        >
           Add to cart
         </Button>
       </View>

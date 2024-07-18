@@ -3,8 +3,10 @@ import { View } from "react-native";
 import { IconButton, Text } from "react-native-paper";
 import { images } from "@/Data/images";
 import styles from "@/styles/style";
+import useCart from "@/hooks/useCart";
 
 export default function Item({ props }) {
+  const { removeFromCart } = useCart();
   if (!props || !props.image || !props.title || !props.price) {
     throw new Error("Invalid Book props");
   }
@@ -19,6 +21,7 @@ export default function Item({ props }) {
         borderRadius: 20,
       }}
     >
+      <Text style={[styles.h1, { color: "#000" }]}>x{props.quantity}</Text>
       <Image
         source={images[props.image]}
         style={{
@@ -30,7 +33,15 @@ export default function Item({ props }) {
 
       <Text style={[styles.h1, { color: "#000" }]}>{props.title}</Text>
       <Text style={[styles.h1, { color: "#000" }]}>{props.price}</Text>
-      <IconButton icon="delete" iconColor="red" />
+
+      <IconButton
+        icon="delete"
+        iconColor="red"
+        onPress={() => removeFromCart(props.id)}
+        style={{
+          right: 0,
+        }}
+      />
     </View>
   );
 }

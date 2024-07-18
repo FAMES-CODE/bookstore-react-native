@@ -4,6 +4,7 @@ const CartContext = createContext({
 	cart: [],
 	addToCart: () => {},
 	removeFromCart: () => {},
+	updateQuantity: () => {},
 	clearCart: () => {},
 });
 

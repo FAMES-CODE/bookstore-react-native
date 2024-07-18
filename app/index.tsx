@@ -19,6 +19,7 @@ export default function Index() {
     >
       <IconButton
         icon="book"
+        iconColor="black"
         style={{
           transform: [{ scale: 4 }],
         }}
@@ -29,6 +30,7 @@ export default function Index() {
           styles.h1,
           {
             lineHeight: 70,
+            color: "#000",
           },
         ]}
         variant="displayMedium"

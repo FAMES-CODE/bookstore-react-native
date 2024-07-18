@@ -4,38 +4,33 @@ import { Image } from "expo-image";
 import styles from "@/styles/style";
 import { Button, Text } from "react-native-paper";
 import books from "../../Data/books";
-
-// Image are imported in that way to avoid the error: "image not showing on Expo App"
-const images = {
-  "the-alchemist.jpg": require("../../assets/books/the-alchemist.jpg"),
-  "the-little-prince.jpg": require("../../assets/books/the-little-prince.jpg"),
-  "the-hobbit.jpg": require("../../assets/books/the-hobbit.jpg"),
-  "the-great-gatsby.jpg": require("../../assets/books/the-great-gatsby.jpg"),
-  "the-catcher-in-the-rye.jpg": require("../../assets/books/the-catcher-in-the-rye.jpg"),
-  "the-da-vinci-code.jpg": require("../../assets/books/the-da-vinci-code.jpg"),
-  "song-of-ice-and-fire.jpg": require("../../assets/books/song-of-ice-and-fire.jpg"),
-  "the-lord-of-the-rings.jpg": require("../../assets/books/the-lord-of-the-rings.jpg"),
-  "the-chronicles-of-narnia.jpg": require("../../assets/books/the-chronicles-of-narnia.jpg"),
-  "the-hunger-games.jpg": require("../../assets/books/the-hunger-games.jpg"),
-  "the-hitchhikers-guide-to-the-galaxy.png": require("../../assets/books/the-hitchhikers-guide-to-the-galaxy.png"),
-  "harry-potter-and-the-philosophers-stone.jpg": require("../../assets/books/harry-potter-and-the-philosophers-stone.jpg"),
-  "game-of-thrones.jpg": require("../../assets/books/game-of-thrones.jpg"),
-};
-
+import useCart from "@/hooks/useCart";
+import {images} from "../../Data/images";
 export default function Index() {
+  
+  
   if (!books || books.length === 0) {
     return (
-      <View style={[styles.view, styles.container, {
-        justifyContent: "center",
-        alignItems: "center",
-      }]}>
-        <Text variant="titleLarge" style={styles.h1}>No books available.</Text>
+      <View
+        style={[
+          styles.view,
+          styles.container,
+          {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        ]}
+      >
+        <Text variant="titleLarge" style={styles.h1}>
+          No books available.
+        </Text>
       </View>
     );
   }
 
   return (
     <View style={[styles.view, styles.container]}>
+      
       <ScrollView>
         <View
           style={{
@@ -57,11 +52,15 @@ export default function Index() {
   );
 }
 
-function Book({ props }: { props: { image: keyof typeof images; title: string; price: number } }) {
+function Book({
+  props,
+}: {
+  props: { image: keyof typeof images; title: string; price: number };
+}) {
   if (!props || !props.image || !props.title || !props.price) {
     throw new Error("Invalid Book props");
   }
-
+  const { cart, addToCart } = useCart();
   return (
     <View
       style={{
@@ -105,7 +104,7 @@ function Book({ props }: { props: { image: keyof typeof images; title: string; p
           <Text style={[styles.text]}>{props.title}</Text>
           <Text style={[styles.text]}>{props.price}$</Text>
         </View>
-        <Button icon="cart" mode="text" textColor="white">
+        <Button icon="cart" mode="text" textColor="white" onPress={() => addToCart(props)}>
           Add to cart
         </Button>
       </View>

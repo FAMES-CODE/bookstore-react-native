@@ -1,7 +1,14 @@
 import { Slot, Stack } from "expo-router";
+import { PaperProvider } from "react-native-paper";
+import React from "react";
+import CartProvider from "@/Providers/CartProvider";
 
 export default function RootLayout() {
   return (
-    <Slot />
+    <PaperProvider>
+      <CartProvider>
+        <Slot />
+      </CartProvider>
+    </PaperProvider>
   );
 }

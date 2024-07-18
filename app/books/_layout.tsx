@@ -1,7 +1,18 @@
+import useCart from "@/hooks/useCart";
 import { router, Stack } from "expo-router";
-import { Button } from "react-native-paper";
+import React from "react";
+import { View } from "react-native";
+import {
+  Button,
+  IconButton,
+  Modal,
+  PaperProvider,
+  Portal,
+  Text,
+} from "react-native-paper";
 
 export default function RootLayout() {
+  const { cart } = useCart();
   return (
     <Stack>
       <Stack.Screen
@@ -18,24 +29,37 @@ export default function RootLayout() {
           headerTintColor: "white",
           headerLeft: () => {
             return (
-              <Button
+              <IconButton
                 icon="arrow-left"
                 onPress={() => router.back()}
-                textColor="white"
-              >
-                {""}
-              </Button>
+                iconColor="white"
+              />
             );
           },
           headerRight: () => {
             return (
-              <Button
-                icon="cart"
-                onPress={() => router.push("/checkout")}
-                textColor="white"
+              <View
+                style={{
+                  backgroundColor: "#B5C18E",
+                  position: "relative",
+                }}
+                
               >
-                {""}
-              </Button>
+                <IconButton onPress={() => router.push("/checkout")} iconColor="white" icon="cart" />
+                <Text
+                  style={{
+                    color: "white",
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    borderColor: "#A0937D",
+                    marginRight: 10,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {cart.length > 0 ? cart.length : ""}
+                </Text>
+              </View>
             );
           },
         }}

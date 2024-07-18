@@ -9,7 +9,7 @@ import { Link } from "expo-router";
 import { Platform } from "react-native";
 import React from "react";
 export default function Index() {
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = React.useState<boolean>(true);
 
   return (
     <View
@@ -64,7 +64,8 @@ export default function Index() {
   );
 }
 
-function WebAlert({ visible, setVisible }) {
+function WebAlert({ visible, setVisible }: { visible: boolean, setVisible: (visible: boolean) => void })
+  {
   return (
     <View
       style={{

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import useCart from "@/hooks/useCart";
 import Toast from "react-native-root-toast";
+import { z } from "zod";
+import { schema } from "@/validations/schema";
 
 export default function Form() {
   const { cart } = useCart();
@@ -69,17 +71,35 @@ export default function Form() {
           style={{ backgroundColor: "#B5C18E" }}
           textColor="white"
           onPress={() => {
-            console.log(form);
             if (form.name && form.address && form.phone) {
-              let toast = Toast.show("Your order has been placed", {
-                duration: Toast.durations.LONG,
-                position: Toast.positions.BOTTOM,
-                shadow: true,
-                animation: true,
-                hideOnPress: true,
-                delay: 0,
-                backgroundColor: "green",
-              });
+              try {
+                if (schema.parse(form)) {
+                  let toast = Toast.show("Your order has been placed", {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                    backgroundColor: "green",
+                  });
+                  return true;
+                }
+              } catch (error: any) {
+                const errorMessage = error.errors
+                  .map((err: any) => err.message)
+                  .join("\n");
+                Toast.show(`Error:\n${errorMessage}`, {
+                  duration: Toast.durations.LONG,
+                  position: Toast.positions.BOTTOM,
+                  shadow: true,
+                  animation: true,
+                  hideOnPress: true,
+                  delay: 0,
+                  backgroundColor: "red",
+                });
+                return false;
+              }
             } else {
               let toast = Toast.show("Please fill all the fields", {
                 duration: Toast.durations.LONG,

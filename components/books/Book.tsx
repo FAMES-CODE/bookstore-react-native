@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { Button, Text } from "react-native-paper";
 import styles from "@/styles/style";
 import useCart from "@/hooks/useCart";
-
+import { Platform } from "react-native";
 export default function Book({
   props,
 }: {
@@ -19,9 +19,12 @@ export default function Book({
   return (
     <View
       style={{
+        backgroundColor: "#A0937D",
+        paddingTop: 20,
+        marginTop: 60,
         marginBottom: 60,
-        width: "100%",
-        height: 500,
+        width: Platform.OS === "web" ? "20%" : "100%",
+        height: Platform.OS === "web" ? 300 : 500,
       }}
       key={props.id}
     >
@@ -38,7 +41,6 @@ export default function Book({
       <View
         style={{
           display: "flex",
-          width: "auto",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",

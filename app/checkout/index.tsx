@@ -41,7 +41,7 @@ export default function Index() {
             margin: 30,
           }}
         >
-          <View style={[styles.container, {
+          <View style={[{
             gap: 10,
             alignItems: "center",
           }]}>

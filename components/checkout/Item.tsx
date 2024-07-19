@@ -4,13 +4,14 @@ import { IconButton, Text } from "react-native-paper";
 import { images } from "@/Data/images";
 import styles from "@/styles/style";
 import useCart from "@/hooks/useCart";
+import { Platform } from "react-native";
 export default function Item({ props }) {
   const { removeFromCart, updateQuantity } = useCart();
   if (!props || !props.image || !props.title || !props.price) {
     throw new Error("Invalid Book props");
   }
   return (
-    <View style={{ marginBottom: 20, display: "flex" }}>
+    <View style={{ marginBottom: 20, display: "flex", width: Platform.OS === "web" ? "100%" : "" }}>
       <View
         style={{
           width: "100%",

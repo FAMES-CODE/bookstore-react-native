@@ -9,8 +9,11 @@ export default function Book({
   props,
 }: {
   props: {
-      id: number | null | undefined; image: keyof typeof images; title: string; price: number 
-};
+    id: number | null | undefined;
+    image: keyof typeof images;
+    title: string;
+    price: number;
+  };
 }) {
   if (!props || !props.image || !props.title || !props.price) {
     throw new Error("Invalid Book props");
@@ -19,12 +22,15 @@ export default function Book({
   return (
     <View
       style={{
-        backgroundColor: "#A0937D",
+        backgroundColor: "#E7D4B5",
         paddingTop: 20,
-        marginTop: 60,
-        marginBottom: 60,
-        width: Platform.OS === "web" ? "20%" : "100%",
-        height: Platform.OS === "web" ? 300 : 500,
+        paddingBottom: 20,
+        marginTop: Platform.OS === "web" ? 80 : 0,
+        marginBottom: 160,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        width: Platform.OS === "web" ? "30%" : "100%",
+        height: Platform.OS === "web" ? 600 : 500,
       }}
       key={props.id}
     >
@@ -35,8 +41,9 @@ export default function Book({
           height: "100%",
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
+          
         }}
-        contentFit="contain"
+        contentFit={Platform.OS === "web" ? "fill" : "contain"}
       />
       <View
         style={{
@@ -44,7 +51,7 @@ export default function Book({
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#A0937D",
+          backgroundColor: "#E7D4B5",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
         }}
@@ -55,17 +62,29 @@ export default function Book({
             flexDirection: "row",
             justifyContent: "space-between",
             width: "100%",
-            paddingLeft: 20,
-            paddingRight: 20,
+            padding: 10,
           }}
         >
-          <Text style={[styles.text]}>{props.title}</Text>
-          <Text style={[styles.text]}>{props.price}$</Text>
+          <Text style={[styles.text, {
+            color: "black",
+            width: "60%",
+          }]}>{props.title}</Text>
+          <Text style={[styles.text, {
+            color: "black"
+          }]}>{props.price}$</Text>
         </View>
+
         <Button
           icon="cart"
           mode="text"
           textColor="white"
+          style={{
+            backgroundColor: "#B5C18E",
+            padding: 10,
+            width: "100%",
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+          }}
           onPress={() => {
             const bookInCart = cart.find((book: any) => book.id === props.id);
             const quantity = bookInCart ? bookInCart.quantity + 1 : 1;

@@ -67,7 +67,7 @@ export default function Form() {
         <Button
           mode="elevated"
           style={{ backgroundColor: "#B5C18E" }}
-          textColor="black"
+          textColor="white"
           onPress={() => {
             console.log(form);
             if (form.name && form.address && form.phone) {

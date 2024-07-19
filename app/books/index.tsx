@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { Platform, ScrollView, View } from "react-native";
 import React from "react";
 import { Image } from "expo-image";
 import styles from "@/styles/style";
@@ -30,14 +30,28 @@ export default function Index() {
   return (
     <View style={[styles.view, styles.container]}>
       <ScrollView>
+        <Text
+          variant="titleLarge"
+          style={[
+            styles.h1,
+            {
+              color: "black",
+              textAlign: "center",
+              paddingTop: Platform.OS === "web" ? 40 : 20,
+            },
+          ]}
+        >
+          Discover Our Books
+        </Text>
         <View
           style={{
-            flex: 1,
-            flexDirection: "column",
+            display: "flex",
+            flexDirection: Platform.OS === "web" ? "row" : "column",
+            flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            gap: 60,
             padding: 40,
+            gap: Platform.OS === "web" ? 80 : 0,
           }}
         >
           {books.map((book, index) => {

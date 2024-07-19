@@ -23,8 +23,8 @@ export default function Book({
     <View
       style={{
         backgroundColor: "#E7D4B5",
-        marginTop: Platform.OS === "web" ? "10vh" : 40,
-        marginBottom: Platform.OS === "web" ? "10vh" : 160,
+        marginTop: Platform.OS === "web" ? "10vh" : 0,
+        marginBottom: Platform.OS === "web" ? "10vh" : 260,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         width: Platform.OS === "web" ? "20%" : "100%",

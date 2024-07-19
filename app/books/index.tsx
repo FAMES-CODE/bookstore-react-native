@@ -1,13 +1,14 @@
 import { Platform, ScrollView, View } from "react-native";
 import React from "react";
-import { Image } from "expo-image";
 import styles from "@/styles/style";
-import { Button, Text } from "react-native-paper";
+import { FAB, Text } from "react-native-paper";
 import books from "../../Data/books";
-import useCart from "@/hooks/useCart";
 import Book from "@/components/books/Book";
+import CustomBottomSheet from "@/components/books/CustomBottomSheet";
+import useCart from "@/hooks/useCart";
 
 export default function Index() {
+  const {cart} = useCart()
   if (!books || books.length === 0) {
     return (
       <View
@@ -26,9 +27,40 @@ export default function Index() {
       </View>
     );
   }
-
+  const [visible, setVisible] = React.useState(false);
   return (
     <View style={[styles.view, styles.container]}>
+      <CustomBottomSheet visible={visible} setVisible={setVisible} />
+      <View
+        style={{
+          display: !visible ? "flex" : "none",
+          position: "absolute",
+          right: 24,
+          bottom: 24,
+          zIndex: 9,
+        }}
+      >
+        <FAB
+          visible={!visible}
+          icon="cart"
+          color="white"
+          onPress={() => setVisible(!visible)}
+          style={{
+            backgroundColor: "#B5C18E",
+          }}
+        />
+        <Text variant="titleLarge" style={[styles.h1, {
+          color: "white",
+          position: "absolute",
+          top: -10,
+          right: -10,
+          backgroundColor: "#B5C18E",
+          borderRadius: 50,
+          width: 30,
+          height: 30,
+          textAlign: "center",      
+        }]}>{cart.length}</Text>
+      </View>
       <ScrollView>
         <Text
           variant="titleLarge"
@@ -43,6 +75,7 @@ export default function Index() {
         >
           Discover Our Books
         </Text>
+
         <View
           style={{
             display: "flex",
@@ -65,4 +98,3 @@ export default function Index() {
     </View>
   );
 }
-

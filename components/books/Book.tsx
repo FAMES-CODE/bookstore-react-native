@@ -23,14 +23,13 @@ export default function Book({
     <View
       style={{
         backgroundColor: "#E7D4B5",
-        paddingTop: 20,
-        paddingBottom: 20,
-        marginTop: Platform.OS === "web" ? 80 : 0,
-        marginBottom: 160,
+        marginTop: Platform.OS === "web" ? "10vh" : 40,
+        marginBottom: Platform.OS === "web" ? "10vh" : 160,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        width: Platform.OS === "web" ? "30%" : "100%",
-        height: Platform.OS === "web" ? 600 : 500,
+        width: Platform.OS === "web" ? "20%" : "100%",
+        maxWidth: "100%",
+        height: Platform.OS === "web" ? "60vh" : 500,
       }}
       key={props.id}
     >
@@ -41,7 +40,6 @@ export default function Book({
           height: "100%",
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          
         }}
         contentFit={Platform.OS === "web" ? "fill" : "contain"}
       />
@@ -53,7 +51,7 @@ export default function Book({
           alignItems: "center",
           backgroundColor: "#E7D4B5",
           borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
+          borderBottomRightRadius: 20, 
         }}
       >
         <View
@@ -62,16 +60,30 @@ export default function Book({
             flexDirection: "row",
             justifyContent: "space-between",
             width: "100%",
-            padding: 10,
+            padding: 20,
           }}
         >
-          <Text style={[styles.text, {
-            color: "black",
-            width: "60%",
-          }]}>{props.title}</Text>
-          <Text style={[styles.text, {
-            color: "black"
-          }]}>{props.price}$</Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                color: "black",
+                width: "60%",
+              },
+            ]}
+          >
+            {props.title}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                color: "black",
+              },
+            ]}
+          >
+            {props.price}$
+          </Text>
         </View>
 
         <Button

@@ -50,7 +50,9 @@ export default function Index() {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            padding: 40,
+            padding: Platform.OS === "web" ? 0 : 40,
+            width: "100%",
+            height: "100%",
             gap: Platform.OS === "web" ? 80 : 0,
           }}
         >

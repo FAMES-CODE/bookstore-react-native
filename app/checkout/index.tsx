@@ -41,15 +41,20 @@ export default function Index() {
             margin: 30,
           }}
         >
-          <View style={[{
-            gap: 10,
-            alignItems: "center",
-          }]}>
+          <View
+            style={[
+              {
+                gap: 10,
+                alignItems: "center",
+              },
+            ]}
+          >
             {cart && cart.length > 0
               ? cart.map((item, index) => <Item key={index} props={item} />)
               : "No items in cart"}
             <Text variant="titleLarge" style={[styles.h1, { color: "#000" }]}>
-              Total : {cart.reduce((a, b) => a + b.price * b.quantity, 0)} $
+              Total :{" "}
+              {cart.reduce((a, b) => a + b.price * b.quantity, 0).toFixed(2)} $
             </Text>
           </View>
           <Text

@@ -6,7 +6,6 @@ import useCart from "@/hooks/useCart";
 import { ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 
-
 export default function CustomBottomSheet({
   visible,
   setVisible,
@@ -14,8 +13,8 @@ export default function CustomBottomSheet({
   visible: boolean;
   setVisible: Function;
 }) {
-  const { cart, updateQuantity, removeFromCart } = useCart();
- const router = useRouter();
+  const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
+  const router = useRouter();
   return (
     <View
       style={{
@@ -40,7 +39,27 @@ export default function CustomBottomSheet({
           height: "auto",
         }}
       >
-        <View style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {cart.length > 0 && (
+            <Button
+              mode="text"
+              textColor="white"
+              onPress={() => clearCart()}
+              icon={"trash-can-outline"}
+              style={{
+                width: "30%",
+              }}
+            >
+              Clear
+            </Button>
+          )}
           <Text
             style={[
               styles.h1,
@@ -57,8 +76,11 @@ export default function CustomBottomSheet({
             icon="close"
             style={{}}
             textColor="white"
-            mode="contained-tonal"
+            mode="text"
             onPress={() => setVisible(false)}
+            style={{
+              width: "30%",
+            }}
           >
             Close
           </Button>
@@ -90,7 +112,9 @@ export default function CustomBottomSheet({
                       marginVertical: 10,
                     }}
                   >
-                    <Text style={styles.text}>x {e.quantity}</Text>
+                    <Text style={[styles.text, {
+                      fontSize: 16
+                    }]}>x {e.quantity}</Text>
                     <Text
                       style={[
                         styles.text,
@@ -148,10 +172,14 @@ export default function CustomBottomSheet({
                 {cart.reduce(
                   (prev, curr) => prev + curr.price * curr.quantity,
                   0
-                )}
+                ).toFixed(2)}
                 $
               </Text>
-              <Button mode="contained-tonal" textColor="white" onPress={() => router.push("/checkout")}>
+              <Button
+                mode="contained-tonal"
+                textColor="white"
+                onPress={() => router.push("/checkout")}
+              >
                 Checkout
               </Button>
             </View>

@@ -16,7 +16,7 @@ export default function Form() {
   });
 
   return (
-    <View style={{ height: "100%" }}>
+    <View>
       <View
         style={{
           display: "flex",

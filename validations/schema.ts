@@ -12,12 +12,7 @@ export const schema = z.object({
   address: z.string().min(6, {
     message: "Address must be at least 6 characters",
   }),
-  phone: z
-    .string()
-    .min(10, {
-      message: "Phone number must be 10 digits",
-    })
-    .max(10, {
-      message: "Phone number must be 10 digits",
-    }),
+  phone: z.string().regex(/^\d{10}$/, {
+    message: "Phone number must be 10 digits",
+  }),
 });

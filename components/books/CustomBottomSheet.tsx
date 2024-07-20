@@ -37,6 +37,7 @@ export default function CustomBottomSheet({
           bottom: 0,
           width: "100%",
           height: "auto",
+          maxHeight: "80%",
         }}
       >
         <View
